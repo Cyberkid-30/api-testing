@@ -1,9 +1,9 @@
 import { FormEvent, useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import AuthContext from "../context";
 import axios from "axios";
 import { API_URL } from "../api";
 import "../index.css";
-import { Link } from "react-router-dom";
 
 export interface FormData {
   soil_type: string;
@@ -19,7 +19,7 @@ interface fetchResponse {
 }
 
 const Diagnose = () => {
-  const [diagnosis, setDiagnosis] = useState<String[]>([]);
+  const [actions, setActions] = useState<String[]>([]);
   const [formData, setFormData] = useState<FormData>({} as FormData);
   const [diseases, setDiseases] = useState<String[]>([]);
 
@@ -58,7 +58,7 @@ const Diagnose = () => {
         }
       );
 
-      setDiagnosis(response.data.actions);
+      setActions(response.data.actions);
     } catch (error) {
       console.error("There was an error!", error);
     }
@@ -66,11 +66,13 @@ const Diagnose = () => {
 
   return (
     <div>
-      <button>
-        <Link to="/login">Signout</Link>
+      <button className="signout-button">
+        <Link className="signout-button" to="/login">
+          Signout
+        </Link>
       </button>
       <div className="container">
-        <h2>Cocoa Disease Diagnosis</h2>
+        <h2>CocoaCare: Intelligent Crop Health Assistant</h2>
         <form onSubmit={handleSubmit}>
           {/* Soil Type Dropdown */}
           <div>
@@ -173,11 +175,11 @@ const Diagnose = () => {
           <button type="submit">Diagnose</button>
         </form>
 
-        {diagnosis.length > 0 && (
+        {actions.length > 0 && (
           <div>
             <h3>Suggested Actions:</h3>
             <ul>
-              {diagnosis.map((action, index) => (
+              {actions.map((action, index) => (
                 <li key={index}>{action}</li>
               ))}
             </ul>

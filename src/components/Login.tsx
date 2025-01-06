@@ -17,7 +17,9 @@ function Login() {
       setToken(response.access_token);
       setMessage("Login successful!");
 
-      navigate("/diagnose");
+      setTimeout(() => {
+        navigate("/diagnose");
+      }, 2000);
     } catch (err: any) {
       setMessage(err.response.data.error);
     }
@@ -26,9 +28,10 @@ function Login() {
   return (
     <div
       style={{
-        width: "50%",
+        width: "33.33%",
         margin: "100px auto",
-        border: "1px solid black",
+        border: "2px solid #9d9d9d",
+        borderRadius: "10px",
         padding: "100px 50px",
       }}
     >
@@ -46,7 +49,7 @@ function Login() {
         />
         <button type="submit">Login</button>
       </form>
-      <p>{message}</p>
+      <p style={{ color: "#d7271a", marginTop: "10px" }}>{message}</p>
     </div>
   );
 }

@@ -15,7 +15,10 @@ function Signup() {
     try {
       const response = await signup(username, password);
       setMessage(response.message);
-      navigate("/login");
+
+      setTimeout(() => {
+        navigate("/login");
+      }, 2500);
     } catch (error: any) {
       setMessage(error.response.data);
     }
@@ -24,9 +27,10 @@ function Signup() {
   return (
     <div
       style={{
-        width: "50%",
+        width: "33.33%",
         margin: "100px auto",
-        border: "1px solid black",
+        border: "2px solid #9d9d9d",
+        borderRadius: "10px",
         padding: "100px 50px",
       }}
     >
@@ -44,7 +48,7 @@ function Signup() {
         />
         <button type="submit">Signup</button>
       </form>
-      <p>{message}</p>
+      <p style={{ color: "#d7271a", marginTop: "10px" }}>{message}</p>
     </div>
   );
 }
