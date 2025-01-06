@@ -3,6 +3,7 @@ import AuthContext from "../context";
 import axios from "axios";
 import { API_URL } from "../api";
 import "../index.css";
+import { Link } from "react-router-dom";
 
 export interface FormData {
   soil_type: string;
@@ -64,131 +65,125 @@ const Diagnose = () => {
   };
 
   return (
-    <div className="container">
-      <h2>Cocoa Disease Diagnosis</h2>
-      <form onSubmit={handleSubmit}>
-        {/* Soil Type Dropdown */}
-        <div>
-          <label>Soil Type:</label>
-          <select
-            name="soil_type"
-            value={formData.soil_type}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select soil type</option>
-            <option value="sterilized">Sterilized</option>
-            <option value="not sterilized">Not Sterilized</option>
-          </select>
-        </div>
+    <div>
+      <button>
+        <Link to="/login">Signout</Link>
+      </button>
+      <div className="container">
+        <h2>Cocoa Disease Diagnosis</h2>
+        <form onSubmit={handleSubmit}>
+          {/* Soil Type Dropdown */}
+          <div>
+            <label>Soil Type:</label>
+            <select
+              name="soil_type"
+              value={formData.soil_type}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select soil type</option>
+              <option value="sterilized">Sterilized</option>
+              <option value="not sterilized">Not Sterilized</option>
+            </select>
+          </div>
 
-        {/* Soil Moisture */}
-        <div>
-          <label>Soil Moisture (%):</label>
-          <input
-            type="Number"
-            name="soil_moisture"
-            value={formData.soil_moisture}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                soil_moisture: parseInt(e.target.value),
-              })
-            }
-            required
-          />
-        </div>
+          {/* Soil Moisture */}
+          <div>
+            <label>Soil Moisture (%):</label>
+            <input
+              type="Number"
+              name="soil_moisture"
+              value={formData.soil_moisture}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  soil_moisture: parseInt(e.target.value),
+                })
+              }
+              required
+            />
+          </div>
 
-        {/* Temperature */}
-        <div>
-          <label>Temperature (°C):</label>
-          <input
-            type="number"
-            name="temperature"
-            value={formData.temperature}
-            onChange={(e) =>
-              setFormData({
-                ...formData,
-                temperature: parseInt(e.target.value),
-              })
-            }
-            required
-          />
-        </div>
+          {/* Temperature */}
+          <div>
+            <label>Temperature (°C):</label>
+            <input
+              type="number"
+              name="temperature"
+              value={formData.temperature}
+              onChange={(e) =>
+                setFormData({
+                  ...formData,
+                  temperature: parseInt(e.target.value),
+                })
+              }
+              required
+            />
+          </div>
 
-        {/* Seedlings Exposed to Sunlight Dropdown */}
-        <div>
-          <label>Seedlings Exposed to Sunlight:</label>
-          <select
-            name="seedlings_exposed_to_sunlight"
-            value={formData.seedlings_exposed_to_sunlight}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select</option>
-            <option value="true">Yes</option>
-            <option value="false">No</option>
-          </select>
-        </div>
+          {/* Seedlings Exposed to Sunlight Dropdown */}
+          <div>
+            <label>Seedlings Exposed to Sunlight:</label>
+            <select
+              name="seedlings_exposed_to_sunlight"
+              value={formData.seedlings_exposed_to_sunlight}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select</option>
+              <option value="true">Yes</option>
+              <option value="false">No</option>
+            </select>
+          </div>
 
-        {/* Growth Stage Dropdown */}
-        <div>
-          <label>Growth Stage:</label>
-          <select
-            name="growth_stage"
-            value={formData.growth_stage}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select growth stage</option>
-            <option value="germination">Germination</option>
-            <option value="seedling">Seedling</option>
-            <option value="nursery">Nursery</option>
-          </select>
-        </div>
+          {/* Growth Stage Dropdown */}
+          <div>
+            <label>Growth Stage:</label>
+            <select
+              name="growth_stage"
+              value={formData.growth_stage}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select growth stage</option>
+              <option value="germination">Germination</option>
+              <option value="seedling">Seedling</option>
+              <option value="nursery">Nursery</option>
+            </select>
+          </div>
 
-        {/* Disease Dropdown */}
-        <div>
-          <label>Disease:</label>
-          <select
-            name="disease"
-            value={formData.disease}
-            onChange={handleChange}
-            required
-          >
-            <option value="">Select disease</option>
-            {diseases.map((disease, index) => (
-              <option key={index} value={disease.toString()}>
-                {disease}
-              </option>
-            ))}
-          </select>
-        </div>
+          {/* Disease Dropdown */}
+          <div>
+            <label>Disease:</label>
+            <select
+              name="disease"
+              value={formData.disease}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Select disease</option>
+              {diseases.map((disease, index) => (
+                <option key={index} value={disease.toString()}>
+                  {disease}
+                </option>
+              ))}
+            </select>
+          </div>
 
-        <button type="submit">Diagnose</button>
-      </form>
+          <button type="submit">Diagnose</button>
+        </form>
 
-      {diagnosis.length > 0 && (
-        <div>
-          <h3>Suggested Actions:</h3>
-          <ul>
-            {diagnosis.map((action, index) => (
-              <li key={index}>{action}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {/* {diseases.length > 0 && (
-        <div>
-          <h3>Diseases</h3>
-          <ul>
-            {diseases.map((disease, index) => (
-              <li key={index}>{disease}</li>
-            ))}
-          </ul>
-        </div>
-      )} */}
+        {diagnosis.length > 0 && (
+          <div>
+            <h3>Suggested Actions:</h3>
+            <ul>
+              {diagnosis.map((action, index) => (
+                <li key={index}>{action}</li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

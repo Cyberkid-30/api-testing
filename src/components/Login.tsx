@@ -1,12 +1,14 @@
 import React, { FormEvent, useContext, useState } from "react";
 import { login } from "../api";
 import AuthContext from "../context";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
   const { setToken } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
@@ -14,6 +16,8 @@ function Login() {
       const response = await login(username, password);
       setToken(response.access_token);
       setMessage("Login successful!");
+
+      navigate("/diagnose");
     } catch (err: any) {
       setMessage(err.response.data.error);
     }

@@ -1,16 +1,21 @@
 import { FormEvent, useState } from "react";
 import { signup } from "../api";
 
+import { useNavigate } from "react-router-dom";
+
 function Signup() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
       const response = await signup(username, password);
       setMessage(response.message);
+      navigate("/login");
     } catch (error: any) {
       setMessage(error.response.data);
     }
