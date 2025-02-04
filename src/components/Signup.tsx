@@ -18,7 +18,7 @@ function Signup() {
 
       setTimeout(() => {
         navigate("/login");
-      }, 2500);
+      }, 1000);
     } catch (error: any) {
       setMessage(error.response.data);
     }

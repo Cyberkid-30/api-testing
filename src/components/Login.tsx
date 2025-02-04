@@ -19,7 +19,7 @@ function Login() {
 
       setTimeout(() => {
         navigate("/diagnose");
-      }, 2000);
+      }, 1000);
     } catch (err: any) {
       setMessage(err.response.data.error);
     }
